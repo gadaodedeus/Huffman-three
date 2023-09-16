@@ -1,0 +1,46 @@
+
+typedef struct node {       //no da arvore
+    char simbolo ;
+    struct node * filho_esq ;
+    struct node * filho_dir ;
+    struct node * prox; //Proximo da lista (esse ponteiro serve para construir a lista que se tornará a arvoere)
+    int peso ; 
+}no;
+
+Funcoes:
+
+1- Inicia tabela/lista()
+	Zera todos os valores
+2- add lits/table()
+	adiciona um novo elemento (list add em ordem crescente, de acordo com o peso)
+3- cria arvore()
+	- cria a lista ordenada de acordo com o vetor ascii 
+	- os primeiros elementos da lista reperesentam os caracteres com menor peso, dessa forma os 2 prieiros elemtentos se tornam filhos de um tereceiro elemento e este é incerido na lista novamente com o novvo peso
+4- cria tabela()
+	- depois de a arvore estar pronta usa-se ela para criar a tabela char-binario
+	- esta funcao funciona de forma recursiva: seu caso base é quando atinge uma folha (um caracter, ja que os nos q nao sao folha nao contem caracteres). O codigo binario é arvmazenado no vet[], quando percorremos a arvore para a direita vet[i] recebe '0', quando vamos para a esquerda vet[i] recebe '1'. Ao chegar na folha atinge-se o caso base e vet contem o codigo binario que representa o char em questao.
+5- cria aux()
+	- com a tabela binaria pronta podemos transformar o texto base em binario. Esta funcao le cada caracter do texto, consulta seu codigo binario e o escreve em um arquivo aux.txt que servira de base para gerar o arquivo comprimido. Completa com '0' ate que a quantidade de bits seja multiplo de 8.
+6- convert()
+	- codigo do lucas
+	
+--main--
+
+--Comprimir
+	- gera o vetor ascii, em que i representa o char, enquanto ascii[i] representa a quantidade de vezes que ess char aparece no texto.
+	- cria a arvore
+	- cria tabela
+	- cria aux
+	- gera arquivo comprimido
+	- printa qnt de letras diferentes presentes no texto. Printa char e peso (i, ascii[i]). Printa, por fim, o char que reprenta o codigo binario. Para esse ultimo print abrimos o aux.txt, lemos 1 byte, ou seja, 8 bits e transforma esse vetor de 8 bits em um char que seja printado no arquivo comprimido.
+	
+--Descomprimir
+	- Le o cabeçalho e cria o vetor ascii, no mesmo modelo da opcao de comprimir (total de letras = soma de todos os pesos)
+	- cria a arvore
+	- cria a tabela binaria
+	- descompreção: enquanto o nuemro total de letras nao for printado o texto nao terminou de ser descomprimido. Le o char do arq comprimido, convert ele para binario. de acordo com o codigo binario percorre-se a arvore (0 vai para a direita, 1 para a esquerda). Ao atingir uma folha printa no arq descomprimido o char representado pela folha e volta aux para a raiz da arvore. Quando o codigo binario (de 8 bits) chega no final (j=8) le-se novamente um char do arq comprimido e continua ate o texto estar completamente descomprimido.
+
+
+
+
+	
